@@ -1,0 +1,7 @@
+Comandi per terminale di Windows
+
+Spostarsi nella cartella del progetto
+
+gcc src/*.c -o programma -Ilib
+programma.exe
+----------------------------------------------------
