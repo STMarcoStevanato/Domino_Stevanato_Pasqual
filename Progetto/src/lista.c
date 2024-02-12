@@ -118,3 +118,10 @@ Nodo* pop_casuale(Lista_doppia* ptr, int i) {
     a->previo = b;
     return corrente;
 }
+
+void crea_lista(int n, Lista_doppia* a) {
+    a->testa = NULL;
+    a->coda = NULL;
+    inizializza(a);
+    for (int i = 1; i<n; i++) push_back(a);
+}
