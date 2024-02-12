@@ -20,5 +20,6 @@ extern void push_front(Lista_doppia* ptr);
 extern void push_back(Lista_doppia* ptr);
 extern void free_lista(Lista_doppia* ptr);
 extern Nodo* pop_casuale(Lista_doppia* ptr, int i);
+extern void crea_lista(int n, Lista_doppia* a);
 
 #endif
