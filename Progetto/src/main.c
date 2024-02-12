@@ -9,16 +9,9 @@
 
 int main() {
     srand(time(NULL));
-    Lista_doppia i;
-    i.testa = NULL;
-    i.coda = NULL;
-    inizializza(&i);
-    push_front(&i);
-    push_front(&i);
-    push_back(&i);
-    stampa_lista(&i);
-    pop_casuale(&i, 2);
-    printf("\n");
-    stampa_lista(&i);
+    int a = menu_scelta();
+    Lista_doppia mano;
+    crea_lista(a, &mano);
+    stampa_lista(&mano);
     return 0;
 }
