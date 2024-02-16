@@ -4,5 +4,6 @@
 #include "interattiva.h"
 
 extern int menu_scelta();
+extern void stampa_mano(Lista_doppia* ptr);
 
 #endif //PROGETTO_INTERATTIVA_H
