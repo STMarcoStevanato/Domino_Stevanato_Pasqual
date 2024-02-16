@@ -125,3 +125,13 @@ void crea_lista(int n, Lista_doppia* a) {
     inizializza(a);
     for (int i = 1; i<n; i++) push_back(a);
 }
+
+int num_elementi(Lista_doppia* ptr) {
+    int i = 0;
+    Nodo* corrente = ptr->testa;
+    while (corrente != NULL) {
+        corrente = corrente->prossimo;
+        i++;
+    }
+    return  i;
+}
