@@ -7,7 +7,7 @@
 #include "tessera.h"
 #include "lista.h"
 
-void inizializza(Lista_doppia* ptr) {
+void inizializza_random(Lista_doppia* ptr) {
     Nodo* nuovoNodo = malloc(sizeof(Nodo));
     if (nuovoNodo == NULL) {
         fprintf(stderr, "ERROR MEMORY ALLOCATION");
@@ -37,9 +37,9 @@ void stampa_lista(Lista_doppia* ptr) {
     }
 }
 
-void push_front(Lista_doppia* ptr) {
+void push_front_random(Lista_doppia* ptr) {
     if (ptr->testa == NULL) {
-        inizializza(ptr);
+        inizializza_random(ptr);
     }
     else {
         Nodo* nuovoNodo = malloc(sizeof(Nodo));
@@ -60,9 +60,9 @@ void push_front(Lista_doppia* ptr) {
     }
 }
 
-void push_back(Lista_doppia* ptr) {
+void push_back_random(Lista_doppia* ptr) {
     if (ptr->testa == NULL) {
-        inizializza(ptr);
+        inizializza_random(ptr);
     }
     else {
         Nodo* nuovoNodo = malloc(sizeof(Nodo));
@@ -120,8 +120,8 @@ Nodo* pop_casuale(Lista_doppia* ptr, int i) {
 void crea_lista(int n, Lista_doppia* a) {
     a->testa = NULL;
     a->coda = NULL;
-    inizializza(a);
-    for (int i = 1; i<n; i++) push_back(a);
+    inizializza_random(a);
+    for (int i = 1; i<n; i++) push_back_random(a);
 }
 
 int num_elementi(Lista_doppia* ptr) {

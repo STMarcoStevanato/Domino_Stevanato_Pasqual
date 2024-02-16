@@ -64,7 +64,7 @@ void stampa_mano(Lista_doppia* ptr) {
         corrente = corrente->prossimo;
         if (condizione<=i) {
             printf("\n");
-            for (int j = 0; j<10; j++) {
+            for (int j = 1; j<=10; j++) {
                 if (i == 10) printf("    %d     ", j);
                 else printf("    %d    ", (i+j)-10);
             }
