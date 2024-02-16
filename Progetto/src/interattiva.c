@@ -49,3 +49,30 @@ int menu_scelta() {
         }
     }
 }
+
+void stampa_mano(Lista_doppia* ptr) {
+    int condizione = 10;
+    int i = 1;
+    if (ptr == NULL || ptr->testa == NULL) {
+        printf("CANNOT PRINT, BECAUSE LIST IS EMPTY");
+        exit(EXIT_FAILURE);
+    }
+    printf("\n");
+    Nodo* corrente = ptr->testa;
+    while (corrente != NULL) {
+        stampa_tessera(corrente->valore);
+        corrente = corrente->prossimo;
+        if (condizione<=i) {
+            printf("\n");
+            for (int j = 0; j<10; j++) {
+                if (i == 10) printf("    %d     ", j);
+                else printf("    %d    ", (i+j)-10);
+            }
+            printf("\n");
+            printf("\n");
+            condizione += 10;
+        }
+        i++;
+    }
+    printf("\n");
+}
