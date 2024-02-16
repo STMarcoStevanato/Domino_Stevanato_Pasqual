@@ -14,9 +14,9 @@ int main() {
     Lista_doppia mano;
     crea_lista(a, &mano);
     stampa_mano(&mano);
-    Lista_doppia tab;
-    Nodo* tmp = pop_casuale(&mano, 5);
-    tabellone(tmp, &tab, 5);
-    stampa_lista(&tab);
+    Lista_doppia gioco;
+    Nodo* b = pop_casuale(&mano, 5);
+    tabellone(b, &gioco, 5);
+    stampa_lista(&gioco);
     return 0;
 }
