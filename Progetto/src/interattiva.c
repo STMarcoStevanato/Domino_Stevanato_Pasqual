@@ -76,3 +76,24 @@ void stampa_mano(Lista_doppia* ptr) {
     }
     printf("\n");
 }
+
+void tabellone(Nodo* ptr, Lista_doppia* a, int left) {
+    static int first = 1;
+    if (first == 1) {
+        inizializza_valore(ptr, a);
+        return;
+    } else {
+        switch (left) {
+            case 1: // left
+                push_front_valore(ptr, a);
+                break;
+            case 0: // right
+                push_back_valore(ptr, a);
+                break;
+            default: // error catcher
+                fprintf(stderr, "Please select a valid entry for where you want to put your piece");
+                exit(EXIT_FAILURE);
+        }
+    }
+    first = 0;
+}

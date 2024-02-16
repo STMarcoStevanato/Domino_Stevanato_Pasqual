@@ -1,5 +1,6 @@
 #include "tessera.h"
 #include "lista.h"
+#include "interattiva.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,6 +13,10 @@ int main() {
     int a = menu_scelta();
     Lista_doppia mano;
     crea_lista(a, &mano);
-    stampa_lista(&mano);
+    stampa_mano(&mano);
+    Lista_doppia tab;
+    Nodo* tmp = pop_casuale(&mano, 5);
+    tabellone(tmp, &tab, 5);
+    stampa_lista(&tab);
     return 0;
 }

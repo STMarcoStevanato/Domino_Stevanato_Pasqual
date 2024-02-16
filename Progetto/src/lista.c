@@ -101,13 +101,11 @@ void free_lista(Lista_doppia* ptr) {
     ptr->coda = NULL;
 }
 
-
 // cancellazione di tessera tramite indice e poi return di nodo in indice cancellato
 Nodo* pop_casuale(Lista_doppia* ptr, int i) {
     Nodo* a = ptr->testa->prossimo;
     Nodo* corrente = ptr->testa;
     Nodo* b = NULL;
-
     while(i -1) {
         b = corrente;
         corrente = corrente->prossimo;
@@ -134,4 +132,74 @@ int num_elementi(Lista_doppia* ptr) {
         i++;
     }
     return  i;
+}
+
+void inizializza_valore(Nodo* ptr, Lista_doppia* a) {
+    Nodo* nuovoNodo = malloc(sizeof(Nodo));
+    if (nuovoNodo == NULL) {
+        fprintf(stderr, "ERROR MEMORY ALLOCATION");
+        exit(EXIT_FAILURE);
+    }
+    nuovoNodo->valore = malloc(sizeof(Tessera));
+    if (nuovoNodo->valore == NULL) {
+        fprintf(stderr, "ERROR MEMORY ALLOCATION");
+        exit(EXIT_FAILURE);
+    }
+    nuovoNodo->valore->sx = ptr->valore->sx;
+    nuovoNodo->valore->dx = ptr->valore->dx;
+    nuovoNodo->prossimo = NULL;
+    nuovoNodo->previo = NULL;
+    a->testa = nuovoNodo;
+    a->coda = nuovoNodo;
+    free(ptr);
+}
+
+void push_front_valore(Nodo* ptr, Lista_doppia* a) {
+    if (a->testa == NULL) {
+        inizializza_valore(ptr, a);
+    }
+    else {
+        Nodo* nuovoNodo = malloc(sizeof(Nodo));
+        if (nuovoNodo == NULL) {
+            fprintf(stderr, "ERROR MEMORY ALLOCATION");
+            exit(EXIT_FAILURE);
+        }
+        nuovoNodo->valore = malloc(sizeof(Tessera));
+        if (nuovoNodo->valore == NULL) {
+            fprintf(stderr, "ERROR MEMORY ALLOCATION");
+            exit(EXIT_FAILURE);
+        }
+        nuovoNodo->valore->sx = ptr->valore->sx;
+        nuovoNodo->valore->dx = ptr->valore->dx;
+        nuovoNodo->prossimo = a->testa;
+        nuovoNodo->previo = NULL;
+        a->testa->previo = nuovoNodo;
+        a->testa = nuovoNodo;
+        free(ptr);
+    }
+}
+
+void push_back_valore(Nodo* ptr, Lista_doppia* a) {
+    if (a->testa == NULL) {
+        inizializza_valore(ptr, a);
+    }
+    else {
+        Nodo* nuovoNodo = malloc(sizeof(Nodo));
+        if (nuovoNodo == NULL) {
+            fprintf(stderr, "ERROR MEMORY ALLOCATION");
+            exit(EXIT_FAILURE);
+        }
+        nuovoNodo->valore = malloc(sizeof(Tessera));
+        if (nuovoNodo->valore == NULL) {
+            fprintf(stderr, "ERROR MEMORY ALLOCATION");
+            exit(EXIT_FAILURE);
+        }
+        nuovoNodo->valore->sx = ptr->valore->sx;
+        nuovoNodo->valore->dx = ptr->valore->dx;
+        nuovoNodo->prossimo = NULL;
+        nuovoNodo->previo = a->coda;
+        a->coda->prossimo = nuovoNodo;
+        a->coda = nuovoNodo;
+        free(ptr);
+    }
 }
