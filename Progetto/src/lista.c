@@ -1,28 +1,23 @@
+#include "tessera.h"
+#include "lista.h"
+#include "interattiva.h"
+#include "controllo.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
-#include "tessera.h"
-#include "lista.h"
 
 /*MEX devi
  *1) metti tutte le funzioni simili vicino, esempio:inizializza_random e inizializza_valore devono essere vicini
- *2) creare una libreria controllo che contenga le funzioni che controllano se il nodo è uguale a NULL, così da risparmiare codice
  *3) sistemare i warning*/
 
 void inizializza_random(Lista_doppia* ptr) {
     Nodo* nuovoNodo = malloc(sizeof(Nodo));
-    if (nuovoNodo == NULL) {
-        fprintf(stderr, "ERROR MEMORY ALLOCATION");
-        exit(EXIT_FAILURE);
-    }
+    puntatore_nullo_memory(nuovoNodo);
     nuovoNodo->valore = malloc(sizeof(Tessera));
-    if (nuovoNodo->valore == NULL) {
-        fprintf(stderr, "ERROR MEMORY ALLOCATION");
-        exit(EXIT_FAILURE);
-    }
+    puntatore_nullo_memory(nuovoNodo->valore);
     set_tessera_random(nuovoNodo->valore);
     nuovoNodo->prossimo = NULL;
     nuovoNodo->previo = NULL;
@@ -31,10 +26,7 @@ void inizializza_random(Lista_doppia* ptr) {
 }
 
 void stampa_lista(Lista_doppia* ptr) {
-    if (ptr == NULL || ptr->testa == NULL) {
-        fprintf(stderr, "CANNOT PRINT, BECAUSE LIST IS EMPTY");
-        exit(EXIT_FAILURE);
-    }
+    puntatore_nullo_data(ptr, ptr->testa);
     Nodo* corrente = ptr->testa;
     while (corrente != NULL) {
         stampa_tessera(corrente->valore);
@@ -43,10 +35,7 @@ void stampa_lista(Lista_doppia* ptr) {
 }
 
 void stampa_lista_numerata(Lista_doppia* ptr) {
-    if (ptr == NULL || ptr->testa == NULL) {
-        fprintf(stderr, "CANNOT PRINT, BECAUSE LIST IS EMPTY");
-        exit(EXIT_FAILURE);
-    }
+    puntatore_nullo_data(ptr, ptr->testa);
     printf("\n");
     int condizione = 10;
     int i = 1;
@@ -94,15 +83,9 @@ void push_front_random(Lista_doppia* ptr) {
     }
     else {
         Nodo* nuovoNodo = malloc(sizeof(Nodo));
-        if (nuovoNodo == NULL) {
-            fprintf(stderr, "ERROR MEMORY ALLOCATION");
-            exit(EXIT_FAILURE);
-        }
+        puntatore_nullo_memory(nuovoNodo);
         nuovoNodo->valore = malloc(sizeof(Tessera));
-        if (nuovoNodo->valore == NULL) {
-            fprintf(stderr, "ERROR MEMORY ALLOCATION");
-            exit(EXIT_FAILURE);
-        }
+        puntatore_nullo_memory(nuovoNodo->valore);
         set_tessera_random(nuovoNodo->valore);
         nuovoNodo->prossimo = ptr->testa;
         nuovoNodo->previo = NULL;
@@ -117,15 +100,9 @@ void push_back_random(Lista_doppia* ptr) {
     }
     else {
         Nodo* nuovoNodo = malloc(sizeof(Nodo));
-        if (nuovoNodo == NULL) {
-            fprintf(stderr, "ERROR MEMORY ALLOCATION");
-            exit(EXIT_FAILURE);
-        }
+        puntatore_nullo_memory(nuovoNodo);
         nuovoNodo->valore = malloc(sizeof(Tessera));
-        if (nuovoNodo->valore == NULL) {
-            fprintf(stderr, "ERROR MEMORY ALLOCATION");
-            exit(EXIT_FAILURE);
-        }
+        puntatore_nullo_memory(nuovoNodo->valore);
         set_tessera_random(nuovoNodo->valore);
         nuovoNodo->prossimo = NULL;
         nuovoNodo->previo = ptr->coda;
@@ -135,10 +112,7 @@ void push_back_random(Lista_doppia* ptr) {
 }
 
 void free_lista(Lista_doppia* ptr) {
-    if (ptr == NULL || ptr->testa == NULL) {
-        fprintf(stderr, "CANNOT FREE, BECAUSE LIST IS ALREADY EMPTY");
-        exit(EXIT_FAILURE);
-    }
+    puntatore_nullo_data(ptr, ptr->testa);
     Nodo* a = ptr->testa;
     Nodo* b = NULL;
 
@@ -187,15 +161,9 @@ int num_elementi(Lista_doppia* ptr) {
 
 void inizializza_valore(Nodo* ptr, Lista_doppia* a) {
     Nodo* nuovoNodo = malloc(sizeof(Nodo));
-    if (nuovoNodo == NULL) {
-        fprintf(stderr, "ERROR MEMORY ALLOCATION");
-        exit(EXIT_FAILURE);
-    }
+    puntatore_nullo_memory(nuovoNodo);
     nuovoNodo->valore = malloc(sizeof(Tessera));
-    if (nuovoNodo->valore == NULL) {
-        fprintf(stderr, "ERROR MEMORY ALLOCATION");
-        exit(EXIT_FAILURE);
-    }
+    puntatore_nullo_memory(nuovoNodo->valore);
     nuovoNodo->valore->sx = ptr->valore->sx;
     nuovoNodo->valore->dx = ptr->valore->dx;
     nuovoNodo->prossimo = NULL;
@@ -211,15 +179,9 @@ void push_front_valore(Nodo* ptr, Lista_doppia* a) {
     }
     else {
         Nodo* nuovoNodo = malloc(sizeof(Nodo));
-        if (nuovoNodo == NULL) {
-            fprintf(stderr, "ERROR MEMORY ALLOCATION");
-            exit(EXIT_FAILURE);
-        }
+        puntatore_nullo_memory(nuovoNodo);
         nuovoNodo->valore = malloc(sizeof(Tessera));
-        if (nuovoNodo->valore == NULL) {
-            fprintf(stderr, "ERROR MEMORY ALLOCATION");
-            exit(EXIT_FAILURE);
-        }
+        puntatore_nullo_memory(nuovoNodo->valore);
         nuovoNodo->valore->sx = ptr->valore->sx;
         nuovoNodo->valore->dx = ptr->valore->dx;
         nuovoNodo->prossimo = a->testa;
@@ -236,15 +198,9 @@ void push_back_valore(Nodo* ptr, Lista_doppia* a) {
     }
     else {
         Nodo* nuovoNodo = malloc(sizeof(Nodo));
-        if (nuovoNodo == NULL) {
-            fprintf(stderr, "ERROR MEMORY ALLOCATION");
-            exit(EXIT_FAILURE);
-        }
+        puntatore_nullo_memory(nuovoNodo);
         nuovoNodo->valore = malloc(sizeof(Tessera));
-        if (nuovoNodo->valore == NULL) {
-            fprintf(stderr, "ERROR MEMORY ALLOCATION");
-            exit(EXIT_FAILURE);
-        }
+        puntatore_nullo_memory(nuovoNodo->valore);
         nuovoNodo->valore->sx = ptr->valore->sx;
         nuovoNodo->valore->dx = ptr->valore->dx;
         nuovoNodo->prossimo = NULL;

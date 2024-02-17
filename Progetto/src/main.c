@@ -1,6 +1,7 @@
 #include "tessera.h"
 #include "lista.h"
 #include "interattiva.h"
+#include "controllo.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
