@@ -33,7 +33,7 @@ int menu_scelta() {
         case 4: {
             int tmp = 1;
             int n = 0;
-            printf("Input il numero di tessere con le quali si vuole giocare: ");
+            printf("Selezionare il numero di tessere con le quali si vuole giocare: ");
             do {
                 scanf("%d", &n);
                 if (n < 0) {
@@ -50,31 +50,29 @@ int menu_scelta() {
     }
 }
 
-void stampa_mano(Lista_doppia* ptr) {
-    int condizione = 10;
-    int i = 1;
-    if (ptr == NULL || ptr->testa == NULL) {
-        printf("CANNOT PRINT, BECAUSE LIST IS EMPTY");
-        exit(EXIT_FAILURE);
-    }
+int scelta_tessera(Lista_doppia* ptr) {
+    int tessera = 0;
+    int num_tessere = num_elementi(ptr);
+    do {
+        printf("Selezionare quale tessera posizionare sul campo: ");
+        scanf("%d", &tessera);
+        if (num_tessere < tessera || tessera < 1)
+            printf("Si prega di inserire un numero valido \n");
+    }while(num_tessere < tessera || tessera < 1);
     printf("\n");
-    Nodo* corrente = ptr->testa;
-    while (corrente != NULL) {
-        stampa_tessera(corrente->valore);
-        corrente = corrente->prossimo;
-        if (condizione<=i) {
-            printf("\n");
-            for (int j = 1; j<=10; j++) {
-                if (i == 10) printf("    %d     ", j);
-                else printf("    %d    ", (i+j)-10);
-            }
-            printf("\n");
-            printf("\n");
-            condizione += 10;
-        }
-        i++;
+    return tessera;
+}
+
+void gira_tessera(Lista_doppia* ptr, int i) {
+    Nodo* a = get_nodo(ptr,i);
+    if (a->valore->dx != a->valore->sx) {
+        printf("Vuoi girare la tessere che hai selezionato?\n");
+        stampa_tessera(a->valore);
+        printf(" ---> ");
+        printf("[ %d | %d ] \n", a->valore->dx,a->valore->sx);
+        printf("\n");
     }
-    printf("\n");
+
 }
 
 void tabellone(Nodo* ptr, Lista_doppia* a, int left) {

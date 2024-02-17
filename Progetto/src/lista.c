@@ -7,6 +7,11 @@
 #include "tessera.h"
 #include "lista.h"
 
+/*MEX devi
+ *1) metti tutte le funzioni simili vicino, esempio:inizializza_random e inizializza_valore devono essere vicini
+ *2) creare una libreria controllo che contenga le funzioni che controllano se il nodo è uguale a NULL, così da risparmiare codice
+ *3) sistemare i warning*/
+
 void inizializza_random(Lista_doppia* ptr) {
     Nodo* nuovoNodo = malloc(sizeof(Nodo));
     if (nuovoNodo == NULL) {
@@ -35,6 +40,52 @@ void stampa_lista(Lista_doppia* ptr) {
         stampa_tessera(corrente->valore);
         corrente = corrente->prossimo;
     }
+}
+
+void stampa_lista_numerata(Lista_doppia* ptr) {
+    if (ptr == NULL || ptr->testa == NULL) {
+        fprintf(stderr, "CANNOT PRINT, BECAUSE LIST IS EMPTY");
+        exit(EXIT_FAILURE);
+    }
+    printf("\n");
+    int condizione = 10;
+    int i = 1;
+    Nodo* corrente = ptr->testa;
+    while (corrente != NULL) {
+        stampa_tessera(corrente->valore);
+        corrente = corrente->prossimo;
+        if (condizione<=i) { //Ogni 10 tessere andare a capo e numerarle
+            printf("\n");
+            for (int j = 1; j<=10; j++) {
+                if (i == 10) printf("    %d     ", j);
+                else printf("    %d    ", (i+j)-10);
+            }
+            printf("\n");
+            printf("\n");
+            condizione += 10;
+        }
+        i++;
+    }
+    i--;
+    if (i != condizione-10) {
+        printf("\n");
+        int num_tessere = i-(condizione-10);
+        for (int j = 1; j<=num_tessere; j++) {
+            if (i < 10) printf("    %d     ", j);
+            else printf("    %d    ", (i+j)-num_tessere);
+        }
+        printf("\n");
+    }
+}
+
+Nodo* get_nodo(Lista_doppia* ptr, int i) {
+    int j = 1;
+    Nodo* corrente = ptr->testa;
+    while (corrente != NULL && j < i) {
+        corrente = corrente->prossimo;
+        j++;
+    }
+    return corrente;
 }
 
 void push_front_random(Lista_doppia* ptr) {
@@ -102,7 +153,7 @@ void free_lista(Lista_doppia* ptr) {
 }
 
 // cancellazione di tessera tramite indice e poi return di nodo in indice cancellato
-Nodo* pop_casuale(Lista_doppia* ptr, int i) {
+Nodo* pop_indice(Lista_doppia* ptr, int i) {
     Nodo* a = ptr->testa->prossimo;
     Nodo* corrente = ptr->testa;
     Nodo* b = NULL;

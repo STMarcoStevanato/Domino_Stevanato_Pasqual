@@ -13,10 +13,14 @@ int main() {
     int a = menu_scelta();
     Lista_doppia mano;
     crea_lista(a, &mano);
-    stampa_mano(&mano);
-    Lista_doppia gioco;
-    Nodo* b = pop_casuale(&mano, 5);
-    tabellone(b, &gioco, 5);
-    stampa_lista(&gioco);
+    stampa_lista_numerata(&mano);
+    Lista_doppia tavolo;
+    int scelta = scelta_tessera(&mano);
+    gira_tessera(&mano,scelta);
+    //Nodo* b = pop_indice(&mano, scelta);
+    //Nodo* t = pop_indice(&mano, 6);
+    //tabellone(b, &tavolo, 5);
+    stampa_lista_numerata(&tavolo);
+    //stampa_lista_numerata(&mano);
     return 0;
 }
