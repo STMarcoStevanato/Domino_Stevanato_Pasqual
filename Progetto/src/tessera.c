@@ -21,12 +21,12 @@ void set_tessera_random(Tessera* tessera) {
     tessera->dx = dx;
 }
 
+void stampa_tessera(Tessera* tessera) {
+    printf("[ %d | %d ] ", tessera->sx,tessera->dx);
+}
+
 void swap(Tessera* tessera) {
     int tmp = tessera->dx;
     tessera->dx = tessera->sx;
     tessera->sx = tmp;
-}
-
-void stampa_tessera(Tessera* tessera) {
-    printf("[ %d | %d ] ", tessera->sx,tessera->dx);
 }
