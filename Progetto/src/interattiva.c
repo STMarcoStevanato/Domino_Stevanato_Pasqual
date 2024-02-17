@@ -69,7 +69,7 @@ void gira_tessera(Lista_doppia* ptr, int i) {
     if (a->valore->dx != a->valore->sx) {
         printf("Vuoi girare la tessere che hai selezionato?\n");
         stampa_tessera(a->valore);
-        printf(" ---> ");
+        printf("<---> ");
         printf("[ %d | %d ] \n", a->valore->dx,a->valore->sx);
         printf("\n");
     }
