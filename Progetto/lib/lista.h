@@ -16,10 +16,12 @@ typedef struct Lista_doppia {
 
 extern void inizializza(Lista_doppia* ptr);
 extern void stampa_lista(Lista_doppia* ptr);
+extern void stampa_lista_numerata(Lista_doppia* ptr);
+extern Nodo* get_nodo(Lista_doppia* ptr, int i);
 extern void push_front(Lista_doppia* ptr);
 extern void push_back(Lista_doppia* ptr);
 extern void free_lista(Lista_doppia* ptr);
-extern Nodo* pop_casuale(Lista_doppia* ptr, int i);
+extern Nodo* pop_indice(Lista_doppia* ptr, int i);
 extern void crea_lista(int n, Lista_doppia* a);
 extern int num_elementi(Lista_doppia* ptr);
 extern void inizializza_valore(Nodo* ptr, Lista_doppia* a);
