@@ -133,6 +133,11 @@ void crea_lista(int n, Lista_doppia* a) {
     for (int i = 1; i<n; i++) push_back_random(a);
 }
 
+void crea_lista_vuota(Lista_doppia* a) {
+    a->testa = NULL;
+    a->coda = NULL;
+}
+
 void stampa_lista(Lista_doppia* ptr) {
     puntatore_nullo_data(ptr, ptr->testa);
     Nodo* corrente = ptr->testa;

@@ -72,8 +72,30 @@ void gira_tessera(Lista_doppia* ptr, int i) {
         printf("<---> ");
         printf("[ %d | %d ] \n", a->valore->dx,a->valore->sx);
         printf("\n");
+        printf("Vuoi girare la tessera? \n");
+        int scelta = 0;
+        do {
+            printf("Digitare 1 per SI. Digitare 0 per NO: ");
+            scanf("%d", &scelta);
+            if (scelta < 0 || 1 < scelta)
+                printf("Si prega di inserire un numero valido \n");
+        }while (scelta < 0 || 1 < scelta);
+
+        if (scelta) {
+            printf("La tessera e' stata girata\n");
+            swap(a->valore);
+        }
     }
 
+}
+
+void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
+    if (tavolo->testa == NULL) {
+        Nodo *a = pop_indice(mano, i);
+        inizializza_valore(a, tavolo);
+    } else {
+        //Implementare
+    }
 }
 
 void tabellone(Nodo* ptr, Lista_doppia* a, int left) {
@@ -95,4 +117,12 @@ void tabellone(Nodo* ptr, Lista_doppia* a, int left) {
         }
     }
     first = 0;
+}
+
+int controllo_dx(Nodo* a, Lista_doppia* tavolo) {
+
+}
+
+int controllo_lx(Nodo* a, Lista_doppia* tavolo) {
+
 }
