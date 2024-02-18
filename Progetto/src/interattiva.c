@@ -91,10 +91,132 @@ void gira_tessera(Lista_doppia* ptr, int i) {
 
 void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
     if (tavolo->testa == NULL) {
-        Nodo *a = pop_indice(mano, i);
+        Nodo* a = pop_indice(mano, i);
         inizializza_valore(a, tavolo);
     } else {
-        //Implementare
+        Nodo* b = get_nodo(mano, i);
+        int dx = controllo_dx(b, tavolo);
+        int sx = controllo_sx(b, tavolo);
+        int scelta = 0;
+        if (!(dx && sx))
+            printf("La tessera selezionata non e' valida\n");
+        else if (dx == 1 && sx == 1) {
+            do {
+                printf("Inserire tessera a destra = 0 | Inserire tessera a sinistra = 1 | Tornare indietro = 2\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 2 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 2 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);
+                push_front_valore(b, tavolo);
+            }
+            else if (scelta == 0) {
+                pop_indice(mano, i);
+                push_back_valore(b, tavolo);
+            }
+        }
+        else if (dx == 0 && sx == 1) {
+            do {
+                printf("La tessera puo essere posizionata solo a sinistra, continuare = 1 e tornare indietro = 0\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 1 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 1 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);
+                push_front_valore(b, tavolo);
+            }
+        }
+        else if (dx == 1 && sx == 0) {
+            do {
+                printf("La tessera puo essere posizionata solo a destra, continuare = 1 e tornare indietro = 0\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 1 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 1 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);
+                push_back_valore(b, tavolo);
+            }
+        }
+        else if (dx == 1 && sx == 2) {
+            do {
+                printf("Ruotare tessera e inserire a sinistra = 0 | Inserire tessera a destra = 1 | Tornare indietro = 2\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 2 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 2 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);
+                push_back_valore(b, tavolo);
+            }
+            else if (scelta == 0) {
+                pop_indice(mano, i);\
+                swap(b->valore);
+                push_front_valore(b, tavolo);
+            }
+        }
+        else if (dx == 2 && sx == 1) {
+            do {
+                printf("Ruotare tessera e inserire a destra = 0 | Inserire tessera a sinistra = 1 | Tornare indietro = 2\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 2 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 2 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);
+                push_front_valore(b, tavolo);
+            }
+            else if (scelta == 0){
+                pop_indice(mano, i);\
+                swap(b->valore);
+                push_back_valore(b, tavolo);
+            }
+        }
+        else if (dx == 0 && sx == 2) {
+            do {
+                printf("La tessera puo essere posizionata solo a sinistra, se ruotata, continuare = 1 e tornare indietro = 0\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 1 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 1 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);\
+                swap(b->valore);
+                push_front_valore(b, tavolo);
+            }
+        }
+        else if (dx == 2 && sx == 1) {
+            do {
+                printf("La tessera puo essere posizionata solo a destra, se ruotata, continuare = 1 e tornare indietro = 0\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 1 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 1 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);\
+                swap(b->valore);
+                push_back_valore(b, tavolo);
+            }
+        }
+        else if (dx == 2 && sx == 2) {
+            do {
+                printf("Ruotare tessera e inserire a destra = 0 | Ruotare e inserire tessera a sinistra = 1 | Tornare indietro = 2\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 2 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 2 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);
+                push_front_valore(b, tavolo);
+            }
+            else if (scelta == 0) {
+                pop_indice(mano, i);\
+                swap(b->valore);
+                push_back_valore(b, tavolo);
+            }
+        }
     }
 }
 
@@ -119,10 +241,40 @@ void tabellone(Nodo* ptr, Lista_doppia* a, int left) {
     first = 0;
 }
 
-int controllo_dx(Nodo* a, Lista_doppia* tavolo) {
-
+int controllo_dx(Nodo* ptr, Lista_doppia* tavolo) {
+    puntatore_nullo_memory(tavolo);
+    int ptr_sx = 0;
+    int ptr_dx = 0;
+    int tavolo_dx = 0;
+    ptr_sx = ptr->valore->sx;
+    ptr_dx = ptr->valore->dx;
+    tavolo_dx = tavolo->coda->valore->dx;
+    if (ptr_sx == tavolo_dx) {
+        return 1;
+    }
+    else if (ptr_dx == tavolo_dx) {
+        return 2;
+    }
+    else {
+        return 0;
+    }
 }
 
-int controllo_lx(Nodo* a, Lista_doppia* tavolo) {
-
+int controllo_sx(Nodo* ptr, Lista_doppia* tavolo) {
+    puntatore_nullo_memory(tavolo);
+    int ptr_dx = 0;
+    int ptr_sx = 0;
+    int tavolo_sx = 0;
+    ptr_dx = ptr->valore->dx;
+    ptr_sx = ptr->valore->sx;
+    tavolo_sx = tavolo->testa->valore->sx;
+    if (ptr_dx == tavolo_sx) {
+        return 1;
+    }
+    else if (ptr_sx == tavolo_sx) {
+        return 2;
+    }
+    else {
+        return 0;
+    }
 }
