@@ -111,11 +111,12 @@ void push_back_valore(Nodo* ptr, Lista_doppia* a) {
 }
 
 // cancellazione di tessera tramite indice e poi return di nodo in indice cancellato
-Nodo* pop_indice(Lista_doppia* ptr, int i) {
+/*Nodo* pop_indice(Lista_doppia* ptr, int i) {
     Nodo* a = ptr->testa->prossimo;
-    Nodo* corrente = ptr->testa;
+    Nodo* corrente = ptr->testa;//PROBLEMA
+    //printf("%d\n", corrente->valore->dx);
     Nodo* b = NULL;
-    while(i -1) {
+    while(i) {
         b = corrente;
         corrente = corrente->prossimo;
         a = corrente->prossimo;
@@ -123,6 +124,40 @@ Nodo* pop_indice(Lista_doppia* ptr, int i) {
     }
     b->prossimo = a;
     a->previo = b;
+    return corrente;
+}*/
+
+Nodo* pop_indice(Lista_doppia* ptr, int i) {
+    Nodo* corrente = ptr->testa;
+    Nodo* a = NULL;
+    Nodo* b = NULL;
+    while(i > 0 && corrente != NULL) {
+        b = corrente;
+        corrente = corrente->prossimo;
+        //a = corrente->prossimo;
+        i--;
+    }
+    a = corrente->prossimo;
+
+    // Gestione del primo elemento della lista
+    if (b == NULL) {
+        ptr->testa = a;
+        if (a != NULL) {
+            a->previo = NULL;
+        }
+    } else {
+        b->prossimo = a;
+        if (a != NULL) {
+            a->previo = b;
+        }
+    }
+
+    // Gestione dell'ultimo elemento della lista
+    if (a == NULL) {
+        // Se a è NULL, corrente è l'ultimo elemento della lista, aggiorna la coda
+        ptr->coda = b;
+    }
+
     return corrente;
 }
 

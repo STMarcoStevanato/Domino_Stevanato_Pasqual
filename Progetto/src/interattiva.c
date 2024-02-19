@@ -89,16 +89,17 @@ void gira_tessera(Lista_doppia* ptr, int i) {
 
 }
 
+
 void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
     if (tavolo->testa == NULL) {
-        Nodo* a = pop_indice(mano, i);
+        Nodo* a = pop_indice(mano, --i);
         inizializza_valore(a, tavolo);
     } else {
-        Nodo* b = get_nodo(mano, i);
+        Nodo* b = get_nodo(mano, i--);
         int dx = controllo_dx(b, tavolo);
         int sx = controllo_sx(b, tavolo);
         int scelta = 0;
-        if (!(dx && sx))
+        if (dx == 0 && sx == 0)
             printf("La tessera selezionata non e' valida\n");
         else if (dx == 1 && sx == 1) {
             do {
@@ -152,7 +153,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
                 push_back_valore(b, tavolo);
             }
             else if (scelta == 0) {
-                pop_indice(mano, i);\
+                pop_indice(mano, i);
                 swap(b->valore);
                 push_front_valore(b, tavolo);
             }
@@ -169,7 +170,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
                 push_front_valore(b, tavolo);
             }
             else if (scelta == 0){
-                pop_indice(mano, i);\
+                pop_indice(mano, i);
                 swap(b->valore);
                 push_back_valore(b, tavolo);
             }
@@ -182,9 +183,22 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
                     printf("Numero selezionato non valido\n");
             } while (scelta < 0 || 1 < scelta);
             if (scelta == 1) {
-                pop_indice(mano, i);\
+                pop_indice(mano, i);
                 swap(b->valore);
                 push_front_valore(b, tavolo);
+            }
+        }
+        else if (dx == 2 && sx == 0) {
+            do {
+                printf("La tessera puo essere posizionata solo a destra, se ruotata, continuare = 1 e tornare indietro = 0\n");
+                scanf("%d", &scelta);
+                if (scelta < 0 || 1 < scelta)
+                    printf("Numero selezionato non valido\n");
+            } while (scelta < 0 || 1 < scelta);
+            if (scelta == 1) {
+                pop_indice(mano, i);
+                swap(b->valore);
+                push_back_valore(b, tavolo);
             }
         }
         else if (dx == 2 && sx == 1) {
@@ -195,7 +209,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
                     printf("Numero selezionato non valido\n");
             } while (scelta < 0 || 1 < scelta);
             if (scelta == 1) {
-                pop_indice(mano, i);\
+                pop_indice(mano, i);
                 swap(b->valore);
                 push_back_valore(b, tavolo);
             }
@@ -212,7 +226,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
                 push_front_valore(b, tavolo);
             }
             else if (scelta == 0) {
-                pop_indice(mano, i);\
+                pop_indice(mano, i);
                 swap(b->valore);
                 push_back_valore(b, tavolo);
             }
@@ -220,26 +234,6 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
     }
 }
 
-void tabellone(Nodo* ptr, Lista_doppia* a, int left) {
-    static int first = 1;
-    if (first == 1) {
-        inizializza_valore(ptr, a);
-        return;
-    } else {
-        switch (left) {
-            case 1: // left
-                push_front_valore(ptr, a);
-                break;
-            case 0: // right
-                push_back_valore(ptr, a);
-                break;
-            default: // error catcher
-                fprintf(stderr, "Please select a valid entry for where you want to put your piece");
-                exit(EXIT_FAILURE);
-        }
-    }
-    first = 0;
-}
 
 int controllo_dx(Nodo* ptr, Lista_doppia* tavolo) {
     puntatore_nullo_memory(tavolo);

@@ -17,17 +17,13 @@ int main() {
     stampa_lista_numerata(&mano);
     Lista_doppia tavolo;
     crea_lista_vuota(&tavolo);
-    int scelta = scelta_tessera(&mano);
-    // gira_tessera(&mano,scelta);
-    tessera_campo(&mano, &tavolo, scelta);
-    //Nodo* b = pop_indice(&mano, scelta);
-    //Nodo* t = pop_indice(&mano, 6);
-    //tabellone(b, &tavolo, 5);
-    stampa_lista_numerata(&tavolo);
-    stampa_lista_numerata(&mano);
-    scelta = scelta_tessera(&mano);
-    tessera_campo(&mano, &tavolo, scelta);
-    stampa_lista_numerata(&tavolo);
-    stampa_lista_numerata(&mano);
+    int scelta = 0;
+    while (true) { //CAPIRE PERCHE' LA MANO SI SPUTTANA
+        scelta = scelta_tessera(&mano);
+        // gira_tessera(&mano,scelta);
+        tessera_campo(&mano, &tavolo, scelta);
+        stampa_lista_numerata(&tavolo);
+        stampa_lista_numerata(&mano);
+    }
     return 0;
 }
