@@ -92,10 +92,10 @@ void gira_tessera(Lista_doppia* ptr, int i) {
 
 void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
     if (tavolo->testa == NULL) {
-        Nodo* a = pop_indice(mano, --i);
+        Nodo* a = pop_indice(mano, i);
         inizializza_valore(a, tavolo);
     } else {
-        Nodo* b = get_nodo(mano, i--);
+        Nodo* b = get_nodo(mano, i);
         int dx = controllo_dx(b, tavolo);
         int sx = controllo_sx(b, tavolo);
         int scelta = 0;

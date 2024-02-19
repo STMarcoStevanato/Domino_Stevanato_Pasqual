@@ -9,9 +9,6 @@
 #include <stdio.h>
 #include <time.h>
 
-/*MEX devi
- *3) sistemare i warning*/
-
 void inizializza_random(Lista_doppia* ptr) {
     Nodo* nuovoNodo = malloc(sizeof(Nodo));
     puntatore_nullo_memory(nuovoNodo);
@@ -110,55 +107,29 @@ void push_back_valore(Nodo* ptr, Lista_doppia* a) {
     }
 }
 
-// cancellazione di tessera tramite indice e poi return di nodo in indice cancellato
-/*Nodo* pop_indice(Lista_doppia* ptr, int i) {
-    Nodo* a = ptr->testa->prossimo;
-    Nodo* corrente = ptr->testa;//PROBLEMA
-    //printf("%d\n", corrente->valore->dx);
-    Nodo* b = NULL;
-    while(i) {
-        b = corrente;
-        corrente = corrente->prossimo;
-        a = corrente->prossimo;
-        i--;
-    }
-    b->prossimo = a;
-    a->previo = b;
-    return corrente;
-}*/
-
 Nodo* pop_indice(Lista_doppia* ptr, int i) {
     Nodo* corrente = ptr->testa;
     Nodo* a = NULL;
     Nodo* b = NULL;
-    while(i > 0 && corrente != NULL) {
-        b = corrente;
+    while(i > 0) {
+        b = a;
+        a = corrente;
         corrente = corrente->prossimo;
-        //a = corrente->prossimo;
         i--;
     }
-    a = corrente->prossimo;
-
-    // Gestione del primo elemento della lista
     if (b == NULL) {
-        ptr->testa = a;
-        if (a != NULL) {
-            a->previo = NULL;
-        }
-    } else {
-        b->prossimo = a;
-        if (a != NULL) {
-            a->previo = b;
-        }
+        corrente->previo = NULL;
+        ptr->testa = corrente;
     }
-
-    // Gestione dell'ultimo elemento della lista
-    if (a == NULL) {
-        // Se a è NULL, corrente è l'ultimo elemento della lista, aggiorna la coda
+    else if (corrente == NULL) {
+        b->prossimo = NULL;
         ptr->coda = b;
     }
-
-    return corrente;
+    else {
+        b->prossimo = corrente;
+        corrente->previo = b;
+    }
+    return a;
 }
 
 void crea_lista(int n, Lista_doppia* a) {
