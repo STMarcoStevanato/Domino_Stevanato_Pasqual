@@ -223,6 +223,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             } while (scelta < 0 || 2 < scelta);
             if (scelta == 1) {
                 pop_indice(mano, i);
+                swap(b->valore);
                 push_front_valore(b, tavolo);
             }
             else if (scelta == 0) {
