@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <time.h>
 
+int scr = 0;
+
 int menu_scelta() {
     int scelta = 0;
     do {
@@ -93,6 +95,7 @@ void gira_tessera(Lista_doppia* ptr, int i) {
 void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
     if (tavolo->testa == NULL) {
         Nodo* a = pop_indice(mano, i);
+        score(a);
         inizializza_valore(a, tavolo);
     } else {
         Nodo* b = get_nodo(mano, i);
@@ -110,10 +113,12 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             } while (scelta < 0 || 2 < scelta);
             if (scelta == 1) {
                 pop_indice(mano, i);
+                score(b);
                 push_front_valore(b, tavolo);
             }
             else if (scelta == 0) {
                 pop_indice(mano, i);
+                score(b);
                 push_back_valore(b, tavolo);
             }
         }
@@ -126,6 +131,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             } while (scelta < 0 || 1 < scelta);
             if (scelta == 1) {
                 pop_indice(mano, i);
+                score(b);
                 push_front_valore(b, tavolo);
             }
         }
@@ -138,6 +144,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             } while (scelta < 0 || 1 < scelta);
             if (scelta == 1) {
                 pop_indice(mano, i);
+                score(b);
                 push_back_valore(b, tavolo);
             }
         }
@@ -150,11 +157,13 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             } while (scelta < 0 || 2 < scelta);
             if (scelta == 1) {
                 pop_indice(mano, i);
+                score(b);
                 push_back_valore(b, tavolo);
             }
             else if (scelta == 0) {
                 pop_indice(mano, i);
                 swap(b->valore);
+                score(b);
                 push_front_valore(b, tavolo);
             }
         }
@@ -167,11 +176,13 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             } while (scelta < 0 || 2 < scelta);
             if (scelta == 1) {
                 pop_indice(mano, i);
+                score(b);
                 push_front_valore(b, tavolo);
             }
             else if (scelta == 0){
                 pop_indice(mano, i);
                 swap(b->valore);
+                score(b);
                 push_back_valore(b, tavolo);
             }
         }
@@ -185,6 +196,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             if (scelta == 1) {
                 pop_indice(mano, i);
                 swap(b->valore);
+                score(b);
                 push_front_valore(b, tavolo);
             }
         }
@@ -198,6 +210,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             if (scelta == 1) {
                 pop_indice(mano, i);
                 swap(b->valore);
+                score(b);
                 push_back_valore(b, tavolo);
             }
         }
@@ -211,6 +224,7 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             if (scelta == 1) {
                 pop_indice(mano, i);
                 swap(b->valore);
+                score(b);
                 push_back_valore(b, tavolo);
             }
         }
@@ -224,11 +238,13 @@ void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i) {
             if (scelta == 1) {
                 pop_indice(mano, i);
                 swap(b->valore);
+                score(b);
                 push_front_valore(b, tavolo);
             }
             else if (scelta == 0) {
                 pop_indice(mano, i);
                 swap(b->valore);
+                score(b);
                 push_back_valore(b, tavolo);
             }
         }
@@ -272,4 +288,9 @@ int controllo_sx(Nodo* ptr, Lista_doppia* tavolo) {
     else {
         return 0;
     }
+}
+
+void score(Nodo* nuovaTessera) {
+    puntatore_nullo_memory(nuovaTessera);
+    scr += nuovaTessera->valore->sx + nuovaTessera->valore->dx;
 }
