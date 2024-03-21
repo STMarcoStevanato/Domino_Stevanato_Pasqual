@@ -18,7 +18,8 @@ int main() {
     Lista_doppia tavolo;
     crea_lista_vuota(&tavolo);
     int scelta = 0;
-    while (true) { //CAPIRE PERCHE' LA MANO SI SPUTTANA
+    while (true) {
+        //system("cls");
         scelta = scelta_tessera(&mano);
         // gira_tessera(&mano,scelta);
         tessera_campo(&mano, &tavolo, scelta);

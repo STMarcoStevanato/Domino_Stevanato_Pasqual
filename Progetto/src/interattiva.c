@@ -21,8 +21,9 @@ int menu_scelta() {
         printf("\n");
         scanf("%d",&scelta);
         if (scelta < 0 || scelta > 4)
-            printf("Si prega di selezionare una opzione dall menu :)\n");
+            printf("Si prega di selezionare una opzidcone dall menu :)\n");
     }while(scelta < 0 || scelta > 4);
+    system("cls");
 
     switch (scelta) {
         case 0:
@@ -293,4 +294,6 @@ int controllo_sx(Nodo* ptr, Lista_doppia* tavolo) {
 void score(Nodo* nuovaTessera) {
     puntatore_nullo_memory(nuovaTessera);
     scr += nuovaTessera->valore->sx + nuovaTessera->valore->dx;
+    system("cls");
+    printf("Punteggio ---> %d\n", scr);
 }
