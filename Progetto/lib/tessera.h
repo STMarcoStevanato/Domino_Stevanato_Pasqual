@@ -6,9 +6,9 @@ typedef struct Tessera {
     int dx;
 } Tessera;
 
-extern void set_tessera(Tessera* tessera, int dx, int sx);
-extern void set_tessera_random(Tessera* tessera);
-extern void stampa_tessera(Tessera* tessera);
-extern void swap(Tessera* tessera);
+void set_tessera(Tessera* tessera, int dx, int sx);
+void set_tessera_random(Tessera* tessera);
+void stampa_tessera(Tessera* tessera);
+void swap(Tessera* tessera);
 
 #endif

@@ -3,13 +3,14 @@
 
 #include "interattiva.h"
 
-extern int menu_scelta();
-extern int scelta_tessera(Lista_doppia* ptr);
-extern void gira_tessera(Lista_doppia* ptr, int i);
-extern void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i);
-extern void tabellone(Nodo* ptr, Lista_doppia* a, int left);
-extern int controllo_dx(Nodo* ptr, Lista_doppia* tavolo);
-extern int controllo_sx(Nodo* ptr, Lista_doppia* tavolo);
-extern void score(Nodo* nuovaTessera);
+int menu_scelta();
+int scelta_tessera(Lista_doppia* ptr);
+void gira_tessera(Lista_doppia* ptr, int i);
+void tessera_campo(Lista_doppia* mano, Lista_doppia* tavolo, int i);
+void tabellone(Nodo* ptr, Lista_doppia* a, int left);
+int controllo_dx(Nodo* ptr, Lista_doppia* tavolo);
+int controllo_sx(Nodo* ptr, Lista_doppia* tavolo);
+void score(Nodo* nuovaTessera);
+
 
 #endif //PROGETTO_INTERATTIVA_H
