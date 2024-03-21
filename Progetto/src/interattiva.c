@@ -297,3 +297,25 @@ void score(Nodo* nuovaTessera) {
     system("cls");
     printf("Punteggio ---> %d\n", scr);
 }
+
+int game_over(Lista_doppia* tavolo, Lista_doppia* mano) {
+    if (!tavolo->testa) {
+        return true;
+    }
+
+    Nodo* tmp_ptr = mano->testa;
+    while(tmp_ptr) {
+        // sinistra
+        if (tmp_ptr->valore->sx == tavolo->testa->valore->sx || tmp_ptr->valore->dx == tavolo->testa->valore->sx) {
+            return true;
+        } else if (tmp_ptr->valore->sx == tavolo->coda->valore->dx || tmp_ptr->valore->dx == tavolo->coda->valore->dx) {
+            return true;
+        }
+        tmp_ptr = tmp_ptr->prossimo;
+    }
+    return false;
+}
+
+int get_score() {
+    return scr;
+}
