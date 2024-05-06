@@ -117,7 +117,10 @@ Nodo* pop_indice(Lista_doppia* ptr, int i) {
         corrente = corrente->prossimo;
         i--;
     }
-    if (b == NULL) {
+    if(b == NULL && corrente == NULL) {
+        ptr->testa = NULL;
+    }
+    else if (b == NULL) {
         corrente->previo = NULL;
         ptr->testa = corrente;
     }

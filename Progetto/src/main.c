@@ -24,7 +24,7 @@ int main() {
         // gira_tessera(&mano,scelta);
         tessera_campo(&mano, &tavolo, scelta);
         stampa_lista_numerata(&tavolo);
-        stampa_lista_numerata(&mano);
+        if(mano.testa) stampa_lista_numerata(&mano);
     }
     printf("-------------------------------------------------\n");
     printf("Game Over, your score was %d\n", get_score());
