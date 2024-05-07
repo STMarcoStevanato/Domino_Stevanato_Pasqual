@@ -32,7 +32,6 @@ void inizializza_valore(Nodo* ptr, Lista_doppia* a) {
     nuovoNodo->previo = NULL;
     a->testa = nuovoNodo;
     a->coda = nuovoNodo;
-    free(ptr);
 }
 
 void push_front_random(Lista_doppia* ptr) {
@@ -84,7 +83,6 @@ void push_front_valore(Nodo* ptr, Lista_doppia* a) {
         nuovoNodo->previo = NULL;
         a->testa->previo = nuovoNodo;
         a->testa = nuovoNodo;
-        free(ptr);
     }
 }
 
@@ -103,11 +101,10 @@ void push_back_valore(Nodo* ptr, Lista_doppia* a) {
         nuovoNodo->previo = a->coda;
         a->coda->prossimo = nuovoNodo;
         a->coda = nuovoNodo;
-        free(ptr);
     }
 }
 
-Nodo* pop_indice(Lista_doppia* ptr, int i) {
+void pop_indice(Lista_doppia* ptr, int i) {
     Nodo* corrente = ptr->testa;
     Nodo* a = NULL;
     Nodo* b = NULL;
@@ -132,7 +129,7 @@ Nodo* pop_indice(Lista_doppia* ptr, int i) {
         b->prossimo = corrente;
         corrente->previo = b;
     }
-    return a;
+    free(a);
 }
 
 void crea_lista(int n, Lista_doppia* a) {
