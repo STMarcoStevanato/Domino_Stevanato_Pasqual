@@ -34,6 +34,11 @@ void inizializza_valore(Nodo* ptr, Lista_doppia* a) {
     a->coda = nuovoNodo;
 }
 
+void inizializza_vuota(Lista_doppia* ptr) {
+    ptr->testa = NULL;
+    ptr->coda = NULL;
+}
+
 void push_front_random(Lista_doppia* ptr) {
     if (ptr->testa == NULL) {
         inizializza_random(ptr);
@@ -130,6 +135,19 @@ void pop_indice(Lista_doppia* ptr, int i) {
         corrente->previo = b;
     }
     free(a);
+}
+
+void pop_tessera(Lista_doppia* ptr, Nodo* remove) {
+    if(!ptr->testa) {
+        return;
+    }
+    Nodo* corrente = ptr->testa;
+    int i = 1;
+    while(corrente && (corrente->valore->sx != remove->valore->sx || corrente->valore->dx != remove->valore->dx)) {
+        corrente = corrente->prossimo;
+        i++;
+    }
+    pop_indice(ptr, i);
 }
 
 void crea_lista(int n, Lista_doppia* a) {

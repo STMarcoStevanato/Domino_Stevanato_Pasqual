@@ -1,2 +1,67 @@
-//
-//
+#include "tessera.h"
+#include "lista.h"
+#include "interattiva.h"
+#include "partita.h"
+#include "controllo.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <time.h>
+#include "ai.h"
+
+Lista_doppia* settings(Lista_doppia* mano) {
+    Lista_doppia risultante;
+    inizializza_vuota(&risultante);
+
+    Nodo* corrente = mano->testa->prossimo;
+    Nodo* massimo = mano->testa;
+    while(corrente) {
+        if(corrente->valore->sx + corrente->valore->dx > massimo->valore->sx + massimo->valore->dx) {
+            massimo = corrente;
+        }
+        corrente = corrente->prossimo;
+    }
+    inizializza_valore(massimo, &risultante);
+    stampa_lista_numerata(&risultante);
+    pop_tessera(mano, massimo);
+    stampa_lista_numerata(mano);
+    return risolvi(mano, &risultante);
+}
+
+Lista_doppia* risolvi(Lista_doppia* mano, Lista_doppia* risultante) {
+    stampa_lista_numerata(risultante);
+    if(!game_continue(risultante, mano)) return risultante;
+    Nodo* corrente = mano->testa;
+    Nodo* massimo = NULL;
+    while(corrente) {
+        if(!massimo) {
+            if(corrente->valore->sx == risultante->testa->valore->sx || corrente->valore->sx == risultante->coda->valore->dx || corrente->valore->dx == risultante->testa->valore->sx || corrente->valore->dx == risultante->coda->valore->dx) {
+                massimo = corrente;
+            }
+        }
+        if(corrente->valore->sx + corrente->valore->dx > massimo->valore->sx + massimo->valore->dx && (corrente->valore->sx == risultante->testa->valore->sx || corrente->valore->sx == risultante->coda->valore->dx || corrente->valore->dx == risultante->testa->valore->sx || corrente->valore->dx == risultante->coda->valore->dx)) {
+            massimo = corrente;
+        }
+        corrente = corrente->prossimo;
+    }
+    if (massimo->valore->dx == risultante->testa->valore->sx) {
+        push_front_valore(massimo, risultante);
+        pop_tessera(mano, massimo);
+    } else if(massimo->valore->dx == risultante->coda->valore->dx) {
+        swap(massimo->valore);
+        push_back_valore(massimo, risultante);
+        pop_tessera(mano, massimo);
+    } else if (massimo->valore->sx == risultante->testa->valore->sx) {
+        swap(massimo->valore);
+        push_front_valore(massimo, risultante);
+        pop_tessera(mano, massimo);
+    } else {
+        push_back_valore(massimo, risultante);
+        pop_tessera(mano, massimo);
+    }
+    return risolvi(mano, risultante);
+}
+
+

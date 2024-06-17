@@ -99,7 +99,7 @@ void score(Nodo* nuovaTessera) {
     printf("Punteggio ---> %d\n", scr);
 }
 
-int game_over(Lista_doppia* tavolo, Lista_doppia* mano) {
+int game_continue(Lista_doppia* tavolo, Lista_doppia* mano) {
     if (!tavolo->testa) {
         return true;
     }

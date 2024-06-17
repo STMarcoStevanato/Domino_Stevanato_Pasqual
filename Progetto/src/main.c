@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
+#include "ai.h"
 
 int main() {
     srand(time(NULL));
@@ -18,7 +19,8 @@ int main() {
     Lista_doppia tavolo;
     crea_lista_vuota(&tavolo);
     int scelta = 0;
-    while (game_over(&tavolo, &mano)) {
+    /*
+    while (game_continue(&tavolo, &mano)) {
         //system("cls");
         scelta = scelta_tessera(&mano);
         // gira_tessera(&mano,scelta);
@@ -26,6 +28,8 @@ int main() {
         stampa_lista_numerata(&tavolo);
         if(mano.testa) stampa_lista_numerata(&mano);
     }
+    */
+    stampa_lista_numerata(settings(&mano));
     printf("-------------------------------------------------\n");
     printf("Game Over, your score was %d\n", get_score());
     printf("-------------------------------------------------\n");
