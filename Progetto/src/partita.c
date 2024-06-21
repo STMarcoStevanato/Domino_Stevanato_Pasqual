@@ -99,6 +99,16 @@ void score(Nodo* nuovaTessera) {
     printf("Punteggio ---> %d\n", scr);
 }
 
+void score_ai(Lista_doppia* ptr) {
+    Nodo* corrente = ptr->testa;
+    int cnt = 0;
+    while(corrente) {
+        cnt += val_tessera(corrente->valore);
+        corrente = corrente->prossimo;
+    }
+    scr = cnt;
+}
+
 int game_continue(Lista_doppia* tavolo, Lista_doppia* mano) {
     if (!tavolo->testa) {
         return true;
@@ -106,7 +116,6 @@ int game_continue(Lista_doppia* tavolo, Lista_doppia* mano) {
 
     Nodo* tmp_ptr = mano->testa;
     while(tmp_ptr) {
-        // sinistra
         if (tmp_ptr->valore->sx == tavolo->testa->valore->sx || tmp_ptr->valore->dx == tavolo->testa->valore->sx) {
             return true;
         } else if (tmp_ptr->valore->sx == tavolo->coda->valore->dx || tmp_ptr->valore->dx == tavolo->coda->valore->dx) {

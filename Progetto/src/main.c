@@ -20,6 +20,13 @@ int main() {
     Lista_doppia tavolo;
     crea_lista_vuota(&tavolo);
     int scelta = 0;
+    printf("scegliere modalita: \n");
+    printf("1 --> itterativa \n");
+    printf("2 --> ai \n");
+    char option;
+    do {
+        scanf()
+    }
     /*
     while (game_continue(&tavolo, &mano)) {
         //system("cls");

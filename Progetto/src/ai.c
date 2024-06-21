@@ -24,15 +24,16 @@ Lista_doppia* settings(Lista_doppia* mano) {
         corrente = corrente->prossimo;
     }
     inizializza_valore(massimo, &risultante);
-    stampa_lista_numerata(&risultante);
     pop_tessera(mano, massimo);
-    stampa_lista_numerata(mano);
     return risolvi(mano, &risultante);
 }
 
 Lista_doppia* risolvi(Lista_doppia* mano, Lista_doppia* risultante) {
     stampa_lista_numerata(risultante);
-    if(!game_continue(risultante, mano)) return risultante;
+    if(!game_continue(risultante, mano)) {
+        score_ai(risultante);
+        return risultante;
+    }
     Nodo* corrente = mano->testa;
     Nodo* massimo = NULL;
     while(corrente) {
@@ -40,9 +41,10 @@ Lista_doppia* risolvi(Lista_doppia* mano, Lista_doppia* risultante) {
             if(corrente->valore->sx == risultante->testa->valore->sx || corrente->valore->sx == risultante->coda->valore->dx || corrente->valore->dx == risultante->testa->valore->sx || corrente->valore->dx == risultante->coda->valore->dx) {
                 massimo = corrente;
             }
-        }
-        if(corrente->valore->sx + corrente->valore->dx > massimo->valore->sx + massimo->valore->dx && (corrente->valore->sx == risultante->testa->valore->sx || corrente->valore->sx == risultante->coda->valore->dx || corrente->valore->dx == risultante->testa->valore->sx || corrente->valore->dx == risultante->coda->valore->dx)) {
-            massimo = corrente;
+        } else {
+            if(val_tessera(corrente->valore) > val_tessera(massimo->valore) && (corrente->valore->sx == risultante->testa->valore->sx || corrente->valore->sx == risultante->coda->valore->dx || corrente->valore->dx == risultante->testa->valore->sx || corrente->valore->dx == risultante->coda->valore->dx)) {
+                massimo = corrente;
+            }
         }
         corrente = corrente->prossimo;
     }
