@@ -13,33 +13,24 @@
 
 int main() {
     srand(time(NULL));
-    int a = menu_scelta();
+    int numero_tessere = menu_scelta();
     Lista_doppia mano;
-    crea_lista(a, &mano);
+    crea_lista(numero_tessere, &mano);
     stampa_lista_numerata(&mano);
     Lista_doppia tavolo;
     crea_lista_vuota(&tavolo);
-    int scelta = 0;
-    printf("scegliere modalita: \n");
-    printf("1 --> itterativa \n");
-    printf("2 --> ai \n");
-    char option;
-    do {
-        scanf()
-    }
-    /*
-    while (game_continue(&tavolo, &mano)) {
-        //system("cls");
-        scelta = scelta_tessera(&mano);
-        // gira_tessera(&mano,scelta);
-        tessera_campo(&mano, &tavolo, scelta);
-        stampa_lista_numerata(&tavolo);
-        if(mano.testa) stampa_lista_numerata(&mano);
-    }
-    */
-    stampa_lista_numerata(settings(&mano));
-    printf("-------------------------------------------------\n");
-    printf("Game Over, your score was %d\n", get_score());
-    printf("-------------------------------------------------\n");
+    int scelta = menu_modalita();
+
+    if (scelta == 1) {
+        while (game_continue(&tavolo, &mano)) {
+            scelta = scelta_tessera(&mano);
+            // gira_tessera(&mano,scelta);
+            tessera_campo(&mano, &tavolo, scelta);
+            stampa_lista_numerata(&tavolo);
+            if (mano.testa) stampa_lista_numerata(&mano);
+        }
+    } else stampa_lista_numerata(settings(&mano));
+
+    stampa_punteggio();
     return 0;
 }

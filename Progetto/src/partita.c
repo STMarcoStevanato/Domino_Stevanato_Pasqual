@@ -54,6 +54,19 @@ int menu_scelta() {
     }
 }
 
+int menu_modalita() {
+    int scelta = 0;
+    do {
+        printf("scegliere modalita: \n");
+        printf("1 --> itterativa \n");
+        printf("2 --> ai \n");
+        scanf("%d",&scelta);
+        if (scelta != 1 && scelta != 2)
+            printf("Inserire un numero valido");
+    }while (scelta != 1 && scelta != 2);
+    return scelta;
+}
+
 int controllo_dx(Nodo* ptr, Lista_doppia* tavolo) {
     puntatore_nullo_memory(tavolo);
     int ptr_sx = 0;
@@ -128,4 +141,10 @@ int game_continue(Lista_doppia* tavolo, Lista_doppia* mano) {
 
 int get_score() {
     return scr;
+}
+
+void stampa_punteggio() {
+    printf("-------------------------------------------------\n");
+    printf("Game Over, your score was %d\n", get_score());
+    printf("-------------------------------------------------\n");
 }
