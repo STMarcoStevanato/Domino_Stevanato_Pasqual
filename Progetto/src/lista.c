@@ -162,7 +162,30 @@ void crea_lista_vuota(Lista_doppia* a) {
     a->coda = NULL;
 }
 
+Lista_doppia copyList(Lista_doppia* a) {
+    Lista_doppia nuovaLista;
+    inizializza_vuota(&nuovaLista);
+    if (a->testa == NULL) {
+        return nuovaLista;
+    }
+    Nodo* corrente = a->testa;
+    while (corrente) {
+        push_back_valore(corrente, &nuovaLista);
+        corrente = corrente->prossimo;
+    }
+    return nuovaLista;
+}
+
 void stampa_lista(Lista_doppia* ptr) {
+    puntatore_nullo_data(ptr, ptr->testa);
+    Nodo* corrente = ptr->testa;
+    while (corrente != NULL) {
+        stampa_tessera(corrente->valore);
+        corrente = corrente->prossimo;
+    }
+}
+
+void stampa(Lista_doppia* ptr) {
     puntatore_nullo_data(ptr, ptr->testa);
     Nodo* corrente = ptr->testa;
     while (corrente != NULL) {
@@ -182,6 +205,7 @@ void stampa_lista_numerata(Lista_doppia* ptr) {
         stampa_tessera(corrente->valore);
         corrente = corrente->prossimo;
         if (condizione<=i) { //Ogni 10 tessere andare a capo e numerarle
+            printf("\n");
             for (int j = 1; j<=10; j++) {
                 if (i == 10) printf("    %d     ", j);
                 else printf("    %d    ", (i+j)-10);

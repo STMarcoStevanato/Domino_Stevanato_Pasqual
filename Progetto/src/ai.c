@@ -11,6 +11,63 @@
 #include <time.h>
 #include "ai.h"
 
+/*
+Lista_doppia* settare(Lista_doppia* mano) {
+    printf("settare\n");
+    Lista_doppia risultante;
+    inizializza_vuota(&risultante);
+    Lista_doppia salvata;
+    inizializza_vuota(&salvata);
+    return combinazioni(mano, &risultante, &salvata);
+}
+Lista_doppia* combinazioni(Lista_doppia* mano, Lista_doppia* risultante, Lista_doppia* salvata) {
+    printf("combinazioni\n");
+    if(!game_continue(risultante, mano)) {
+        if(valore_lista(salvata) < valore_lista(risultante)) {
+            salvata = risultante;
+        }
+        stampa(salvata);
+        return salvata;
+    }
+    Nodo* corrente = mano->testa;
+    while(corrente) {
+        if (corrente->valore->dx == risultante->testa->valore->sx) {
+            Lista_doppia nuovoRisultante = copyList(risultante);
+            push_front_valore(corrente, &nuovoRisultante);
+            Lista_doppia nuovaMano = copyList(mano);
+            pop_tessera(&nuovaMano, corrente);
+            combinazioni(&nuovaMano, &nuovoRisultante, salvata);
+        }
+        if(corrente->valore->dx == risultante->coda->valore->dx) {
+            Lista_doppia nuovoRisultante = copyList(risultante);
+            swap(corrente->valore);
+            push_back_valore(corrente, &nuovoRisultante);
+            swap(corrente->valore);
+            Lista_doppia nuovaMano = copyList(mano);
+            pop_tessera(&nuovaMano, corrente);
+            combinazioni(&nuovaMano, &nuovoRisultante, salvata);
+        }
+        if(corrente->valore->sx == risultante->testa->valore->sx) {
+            Lista_doppia nuovoRisultante = copyList(risultante);
+            swap(corrente->valore);
+            push_front_valore(corrente, &nuovoRisultante);
+            swap(corrente->valore);
+            Lista_doppia nuovaMano = copyList(mano);
+            pop_tessera(&nuovaMano, corrente);
+            combinazioni(&nuovaMano, &nuovoRisultante, salvata);
+        }
+        if(corrente->valore->sx == risultante->testa->valore->dx) {
+            Lista_doppia nuovoRisultante = copyList(risultante);
+            push_back_valore(corrente, &nuovoRisultante);
+            Lista_doppia nuovaMano = copyList(mano);
+            pop_tessera(&nuovaMano, corrente);
+            combinazioni(&nuovaMano, &nuovoRisultante, salvata);
+        }
+        corrente = corrente->prossimo;
+    }
+}
+*/
+
 Lista_doppia* settings(Lista_doppia* mano) {
     Lista_doppia risultante;
     inizializza_vuota(&risultante);
@@ -27,27 +84,11 @@ Lista_doppia* settings(Lista_doppia* mano) {
     pop_tessera(mano, massimo);
     return risolvi(mano, &risultante);
 }
-
 Lista_doppia* risolvi(Lista_doppia* mano, Lista_doppia* risultante) {
-    stampa_lista(risultante);
+    stampa_lista_numerata(risultante);
     if(!game_continue(risultante, mano)) {
-        if(mano->testa) {
-            Lista_doppia* ptr;
-            ptr = settings(mano);
-            int a = valore_lista(risultante);
-            int b = valore_lista(ptr);
-            if(a>b) {
-                score_ai(risultante);
-                return risultante;
-            }
-            else {
-                score_ai(ptr);
-                return ptr;
-            }
-        } else {
-            score_ai(risultante);
-            return risultante;
-        }
+        score_ai(risultante);
+        return risultante;
     }
     Nodo* corrente = mano->testa;
     Nodo* massimo = NULL;
@@ -80,5 +121,4 @@ Lista_doppia* risolvi(Lista_doppia* mano, Lista_doppia* risultante) {
     }
     return risolvi(mano, risultante);
 }
-
 

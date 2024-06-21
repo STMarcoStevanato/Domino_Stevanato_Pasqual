@@ -20,13 +20,12 @@ int main() {
     Lista_doppia tavolo;
     crea_lista_vuota(&tavolo);
     int scelta = menu_modalita();
-
     if (scelta == 1) {
         while (game_continue(&tavolo, &mano)) {
             scelta = scelta_tessera(&mano);
             // gira_tessera(&mano,scelta);
             tessera_campo(&mano, &tavolo, scelta);
-            stampa_lista(&tavolo);
+            stampa(&tavolo);
             if (mano.testa) stampa_lista_numerata(&mano);
         }
         if(mano.testa) {
@@ -34,9 +33,12 @@ int main() {
         }
         free_lista(&tavolo);
     } else {
+        /*
+        Lista_doppia* ptr = settare(&mano);
+        stampa(ptr);
+        free_lista(ptr);
+         */
         Lista_doppia* ptr = settings(&mano);
-        printf("Layout migliore delle tessere: \n");
-        stampa_lista(ptr);
         free_lista(ptr);
     }
     stampa_punteggio();
