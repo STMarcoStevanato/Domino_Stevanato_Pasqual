@@ -1,14 +1,15 @@
-#include "tessera.h"
 #include "lista.h"
+#include "controllo.h"
+#include "ai.h"
+#include "partita.h"
+#include "tessera.h"
 #include "interattiva.h"
 #include <stdio.h>
-#include "controllo.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
-#include "ai.h"
 
 int main() {
     srand(time(NULL));

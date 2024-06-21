@@ -30,3 +30,7 @@ void swap(Tessera* tessera) {
     tessera->dx = tessera->sx;
     tessera->sx = tmp;
 }
+
+int val_tessera(Tessera* tessera) {
+    return tessera->dx + tessera->sx;
+}
