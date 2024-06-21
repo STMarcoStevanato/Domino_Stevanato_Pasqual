@@ -26,11 +26,19 @@ int main() {
             scelta = scelta_tessera(&mano);
             // gira_tessera(&mano,scelta);
             tessera_campo(&mano, &tavolo, scelta);
-            stampa_lista_numerata(&tavolo);
+            stampa_lista(&tavolo);
             if (mano.testa) stampa_lista_numerata(&mano);
         }
-    } else stampa_lista_numerata(settings(&mano));
-
+        if(mano.testa) {
+            free_lista(&mano);
+        }
+        free_lista(&tavolo);
+    } else {
+        Lista_doppia* ptr = settings(&mano);
+        printf("Layout migliore delle tessere: \n");
+        stampa_lista(ptr);
+        free_lista(ptr);
+    }
     stampa_punteggio();
     return 0;
 }

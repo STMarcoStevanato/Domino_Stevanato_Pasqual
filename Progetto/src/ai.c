@@ -29,10 +29,25 @@ Lista_doppia* settings(Lista_doppia* mano) {
 }
 
 Lista_doppia* risolvi(Lista_doppia* mano, Lista_doppia* risultante) {
-    stampa_lista_numerata(risultante);
+    stampa_lista(risultante);
     if(!game_continue(risultante, mano)) {
-        score_ai(risultante);
-        return risultante;
+        if(mano->testa) {
+            Lista_doppia* ptr;
+            ptr = settings(mano);
+            int a = valore_lista(risultante);
+            int b = valore_lista(ptr);
+            if(a>b) {
+                score_ai(risultante);
+                return risultante;
+            }
+            else {
+                score_ai(ptr);
+                return ptr;
+            }
+        } else {
+            score_ai(risultante);
+            return risultante;
+        }
     }
     Nodo* corrente = mano->testa;
     Nodo* massimo = NULL;

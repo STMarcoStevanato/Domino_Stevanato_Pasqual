@@ -169,6 +169,7 @@ void stampa_lista(Lista_doppia* ptr) {
         stampa_tessera(corrente->valore);
         corrente = corrente->prossimo;
     }
+    printf("\n");
 }
 
 void stampa_lista_numerata(Lista_doppia* ptr) {
@@ -181,7 +182,6 @@ void stampa_lista_numerata(Lista_doppia* ptr) {
         stampa_tessera(corrente->valore);
         corrente = corrente->prossimo;
         if (condizione<=i) { //Ogni 10 tessere andare a capo e numerarle
-            printf("\n");
             for (int j = 1; j<=10; j++) {
                 if (i == 10) printf("    %d     ", j);
                 else printf("    %d    ", (i+j)-10);
@@ -222,6 +222,16 @@ Nodo* get_nodo(Lista_doppia* ptr, int i) {
         j++;
     }
     return corrente;
+}
+
+int valore_lista(Lista_doppia* ptr) {
+    Nodo* corrente = ptr->testa;
+    int cnt = 0;
+    while(corrente) {
+        cnt += val_tessera(corrente->valore);
+        corrente = corrente->prossimo;
+    }
+    return cnt;
 }
 
 void free_lista(Lista_doppia* ptr) {

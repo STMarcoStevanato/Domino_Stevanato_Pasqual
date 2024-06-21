@@ -110,6 +110,7 @@ void score(Nodo* nuovaTessera) {
     scr += nuovaTessera->valore->sx + nuovaTessera->valore->dx;
     system("cls");
     printf("Punteggio ---> %d\n", scr);
+    printf("\n");
 }
 
 void score_ai(Lista_doppia* ptr) {
