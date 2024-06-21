@@ -29,6 +29,7 @@ void stampa_lista(Lista_doppia* ptr);
 void stampa_lista_numerata(Lista_doppia* ptr);
 int num_elementi(Lista_doppia* ptr);
 Nodo* get_nodo(Lista_doppia* ptr, int i);
+int valore_lista(Lista_doppia* ptr);
 void free_lista(Lista_doppia* ptr);
 
 #endif
