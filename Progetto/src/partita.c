@@ -113,7 +113,7 @@ void score(Nodo* nuovaTessera) {
     printf("\n");
 }
 
-void score_ai(Lista_doppia* ptr) {
+void score_completo(Lista_doppia* ptr) {
     Nodo* corrente = ptr->testa;
     int cnt = 0;
     while(corrente) {

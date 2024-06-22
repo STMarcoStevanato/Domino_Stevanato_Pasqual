@@ -33,13 +33,12 @@ int main() {
         }
         free_lista(&tavolo);
     } else {
-        /*
-        Lista_doppia* ptr = settare(&mano);
-        stampa(ptr);
-        free_lista(ptr);
-         */
-        Lista_doppia* ptr = settings(&mano);
-        free_lista(ptr);
+        Lista_doppia salvata;
+        settare(&mano, &salvata);
+        printf("miglior layout trovato: \n");
+        stampa(&salvata);
+        free_lista(&salvata);
+        free_lista(&mano);
     }
     stampa_punteggio();
     return 0;
